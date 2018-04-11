@@ -32,16 +32,73 @@
 
 ##### 4、安装
 
+```
+yum install zookeeper zookeeper-server
+```
+
 ##### 5、配置
+
+```
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+maxClientCnxns=50
+# The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+dataDir=/var/lib/zookeeper/snapshot
+# the directory where the translog is stored.
+dataLogDir=/var/lib/zookeeper/log
+# the port at which the clients will connect
+clientPort=2181
+server.2=4.8.1.2:2888:3888
+server.8=4.8.1.8:2888:3888
+server.10=4.8.1.10:2888:3888
+```
 
 ##### 6、启动
 
-##### 7、工具
+```
+单机单服务
+命令：systemctl start zookeeper-server
+
+单机多服务
+命令：zookeeper-server start etc/zookeeper/z1/z1.cfg
+     zookeeper-server start etc/zookeeper/z2/z2.cfg
+     zookeeper-server start etc/zookeeper/z3/z3.cfg
+```
+
+##### 7、端口
+
+```
+clientPort # 客户端连接的端口，默认2181
+xxxx:xxxx # follower连接leader的端口（前），默认2888；leader选举的端口（后），默认3888
+```
+
+##### 8、工具
 * zookeeper-client 或 zkCli.sh
 * zookeeper-server-cleanup 或 zkCleanup.sh
 * zookeeper-server 或 zkServer.sh
 
-##### 8、运维
+##### 9、运维
 
 * 连接服务端
 
@@ -51,6 +108,9 @@
 
 远端
 命令：zookeeper-client -server ip:port 或 zkCli.sh -server ip:port # 默认端口2181
+
+集群
+命令：zookeeper-client -server ip1:port,ip2:port,ip3:port 或 zkCli.sh -server ip1:port,ip2:port,ip3:port
 ```
 
 ---
