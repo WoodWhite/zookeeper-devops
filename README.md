@@ -24,6 +24,12 @@
 每提交一定数量（5000或10000，可配置）的事务，做一次快照。
 ```
 
+* 存储结构
+
+```
+以类似目录树数据结构存储数据
+```
+
 ##### 4、安装
 
 ##### 5、配置
@@ -31,9 +37,57 @@
 ##### 6、启动
 
 ##### 7、工具
+* zookeeper-client 或 zkCli.sh
+* zookeeper-server-cleanup 或 zkCleanup.sh
+* zookeeper-server 或 zkServer.sh
 
 ##### 8、运维
-* 清理数据
+
+* 连接服务端
+
+```
+本机
+命令：zookeeper-client 或 zkCli.sh
+
+远端
+命令：zookeeper-client -server ip:port 或 zkCli.sh -server ip:port # 默认端口2181
+```
+
+* 帮助
+
+```
+help
+```
+
+* 查看
+
+```
+查看目录结构
+命令：ls /xxx
+
+查看文件内容
+命令：get /xxx/xxx/xxx
+```
+
+* 删除
+
+```
+删除非空目录
+命令： rmr /xxx
+
+删除文件
+命令：delete /xxx/xxx/xxx
+
+```
+
+* 退出
+
+```
+quit
+```
+
+
+* 清理
 
 ```
 场景
