@@ -1,17 +1,43 @@
 # zookeeper
+[官网](https://zookeeper.apache.org)
+
 版本号：3.4.5
 
 操作系统：Centos 7
 
 ##### 1、简介
 * 功能
+
+```
+i 选举leader
+ii 分布式db
+```
+
 * 概念
 
-##### 2、架构
+```
+```
+
+* 同类
+
+```
+Etcd
+```
+
+##### 2、模式
 * 单机
 * 集群
 
-##### 3、机制
+##### 3、算法
+
+```
+基于 Paxos 的 Zab 算法。
+```
+
+* [Paxos](http://lamport.azurewebsites.net/pubs/paxos-simple.pdf)
+* [Zab](https://pdfs.semanticscholar.org/b02c/6b00bd5dbdbd951fddb00b906c82fa80f0b3.pdf)
+
+##### 4、机制
 * 事务日志（log）
 
 ```
@@ -30,13 +56,13 @@
 以类似目录树数据结构存储数据
 ```
 
-##### 4、安装
+##### 5、安装
 
 ```
 yum install zookeeper zookeeper-server
 ```
 
-##### 5、配置
+##### 6、配置
 
 ```
 # Licensed to the Apache Software Foundation (ASF) under one or more
@@ -65,7 +91,7 @@ initLimit=10
 syncLimit=5
 # the directory where the snapshot is stored.
 dataDir=/var/lib/zookeeper/snapshot
-# the directory where the translog is stored.
+# the directory where the transaction log is stored.
 dataLogDir=/var/lib/zookeeper/log
 # the port at which the clients will connect
 clientPort=2181
@@ -74,7 +100,7 @@ server.8=4.8.1.8:2888:3888
 server.10=4.8.1.10:2888:3888
 ```
 
-##### 6、启动
+##### 7、启动
 
 ```
 单机单服务
@@ -86,19 +112,19 @@ server.10=4.8.1.10:2888:3888
      zookeeper-server start etc/zookeeper/z3/z3.cfg
 ```
 
-##### 7、端口
+##### 8、端口
 
 ```
 clientPort # 客户端连接的端口，默认2181
 xxxx:xxxx # follower连接leader的端口（前），默认2888；leader选举的端口（后），默认3888
 ```
 
-##### 8、工具
+##### 9、工具
 * zookeeper-client 或 zkCli.sh
 * zookeeper-server-cleanup 或 zkCleanup.sh
 * zookeeper-server 或 zkServer.sh
 
-##### 9、运维
+##### 10、运维
 
 * 连接服务端
 
