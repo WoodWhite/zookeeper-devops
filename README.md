@@ -53,6 +53,8 @@
 命令：zookeeper-client -server ip:port 或 zkCli.sh -server ip:port # 默认端口2181
 ```
 
+---
+
 * 帮助
 
 ```
@@ -84,6 +86,18 @@ help
 
 ```
 quit
+```
+
+---
+* 查看服务状态
+
+```
+场景
+集群方式，确定哪一台是leade 或 查看配置文件路径。 
+工具
+zookeeper-server 或 zkServer.sh 
+命令
+zookeeper-server status
 ```
 
 
