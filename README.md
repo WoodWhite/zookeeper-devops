@@ -9,16 +9,30 @@
 * 功能
 
 ```
-i 选举leader
-ii 分布式db
+分布式应用协调服务中间件
+i 命名服务
+ii 配置管理
+iii 同步
+iiii 组服务
 ```
 
 * 概念
 
 ```
+leader/follower
+server/client
+znode
+log/snapshot
+ensemble
+nodes and ephemeral znodes
+conditional updates and watches
 ```
 
-* 同类
+* 组成要素
+
+![](https://zookeeper.apache.org/doc/current/images/zkcomponents.jpg)
+
+* 同功能、同类型服务软件
 
 ```
 Etcd
@@ -41,19 +55,32 @@ Etcd
 * 事务日志（log）
 
 ```
-每提交一个事务都保存在日志中。
+每一个更新操作都分配一个唯一、有序的数，每一个提交的事务都保存在事务日志中，以便数据恢复。
 ```
 
 * 快照 (snapshot)
 
 ```
-每提交一定数量（5000或10000，可配置）的事务，做一次快照。
+提交一定数量（5000或10000，可配置）的事务，做一次快照。
 ```
 
-* 存储结构
+* 数据模型、等级命名空间
 
 ```
-以类似目录树数据结构存储数据
+类似 Linux 目录树的数据结构，不同的是zookeeper将数据存在内存中。
+```
+
+* 服务可用性
+
+```
+大多数可用，整个服务就是可用的。
+如集群中有3个 zookeeper 服务节点，其中2个服务正常，那么这个 zookeeper 服务就是可用的。
+```
+
+* 写请求
+
+```
+所有的写请求都会打到leader上，由leader完成写操作。
 ```
 
 ##### 5、安装
